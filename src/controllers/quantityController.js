@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
 const service = require('../services/quantityService');
 
-// ─── HELPER: extract validated body or throw ─────────────────────────────────
+
 function checkValidation(req) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -12,8 +12,6 @@ function checkValidation(req) {
     }
 }
 
-// ─── POST /add ───────────────────────────────────────────────────────────────
-// Equivalent of @PostMapping("/add")
 async function add(req, res, next) {
     try {
         checkValidation(req);
@@ -23,7 +21,6 @@ async function add(req, res, next) {
     } catch (err) { next(err); }
 }
 
-// ─── POST /subtract ───────────────────────────────────────────────────────────
 async function subtract(req, res, next) {
     try {
         checkValidation(req);
@@ -33,7 +30,7 @@ async function subtract(req, res, next) {
     } catch (err) { next(err); }
 }
 
-// ─── POST /compare ────────────────────────────────────────────────────────────
+
 async function compare(req, res, next) {
     try {
         checkValidation(req);
@@ -43,7 +40,7 @@ async function compare(req, res, next) {
     } catch (err) { next(err); }
 }
 
-// ─── POST /convert ────────────────────────────────────────────────────────────
+
 async function convert(req, res, next) {
     try {
         checkValidation(req);
@@ -53,7 +50,6 @@ async function convert(req, res, next) {
     } catch (err) { next(err); }
 }
 
-// ─── GET /history/:operation ──────────────────────────────────────────────────
 async function history(req, res, next) {
     try {
         const result = await service.getOperationHistory(req.params.operation);
@@ -61,7 +57,7 @@ async function history(req, res, next) {
     } catch (err) { next(err); }
 }
 
-// ─── GET /errors ──────────────────────────────────────────────────────────────
+
 async function errorHistory(req, res, next) {
     try {
         const result = await service.getErrorHistory();
@@ -69,7 +65,7 @@ async function errorHistory(req, res, next) {
     } catch (err) { next(err); }
 }
 
-// ─── GET /count/:operation ────────────────────────────────────────────────────
+
 async function operationCount(req, res, next) {
     try {
         const count = await service.getOperationCount(req.params.operation);
